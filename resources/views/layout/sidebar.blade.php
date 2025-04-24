@@ -91,6 +91,16 @@
                                     <span class="sub-item">topic</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('answer.index') }}">
+                                    <span class="sub-item">answer</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('question.index') }}">
+                                    <span class="sub-item">question</span>
+                                </a>
+                            </li>
 
                         </ul>
                     </div>
