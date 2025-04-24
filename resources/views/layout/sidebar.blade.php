@@ -77,6 +77,16 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('Course.index') }}">
+                                    <span class="sub-item">cuorses</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('lesson.index') }}">
+                                    <span class="sub-item">lesons</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="components/buttons.html">
                                     <span class="sub-item">Buttons</span>
                                 </a>
