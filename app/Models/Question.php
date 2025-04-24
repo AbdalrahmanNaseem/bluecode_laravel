@@ -9,4 +9,29 @@ class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'question',
+        'subject',
+        'point',
+        'image',
+        'topic_id',
+
+
+    ];
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+
+    //
+    //
+    //
+    //
 }
