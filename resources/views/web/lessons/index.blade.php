@@ -46,7 +46,10 @@
                                                 <img src="{{ asset($lesson->image) }}" alt="course image" width="50">
                                             @endif
                                         </td>
-                                        <th class="text-center"> {{ $lesson->course->name }} </th>
+
+                                        @if ($lesson->course)
+                                            <th class="text-center"> {{ $lesson->course->name }} </th>
+                                        @endif
 
                                         <th class="text-center">
                                             @foreach ($lesson->topic as $lessonTopic)

@@ -31,6 +31,13 @@ class CourseController extends Controller
     public function topics_index()
     {
         $topics = Topic::all();
+        $questionsTopics = Question::all();
+        foreach ($topics as $topic) {
+            $topic->questions = $questionsTopics->where('topic_id', $topic->id);
+        }
+        foreach ($topics as $topic) {
+            $topic->lessons = lesson::where('topic_id', $topic->id)->get();
+        }
         return response($topics);
     }
 
