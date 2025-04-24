@@ -248,6 +248,18 @@ class webController extends Controller
         return back()->with('success', 'Lesson created successfully!');
     }
 
+    public function lesson_destroy($id)
+    {
+        $lesson = lesson::findOrFail($id);
+
+        if ($lesson->image && file_exists(public_path($lesson->image))) {
+            unlink(public_path($lesson->image));
+        }
+
+        $lesson->delete();
+
+        return redirect()->route('lesson.index')->with('success', 'Lesson deleted successfully');
+    }
 
     public function topic_index()
     {

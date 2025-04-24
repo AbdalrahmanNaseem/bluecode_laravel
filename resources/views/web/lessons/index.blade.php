@@ -76,9 +76,11 @@
                                                         <i class="bi bi-pencil-square"></i>
                                                     </button>
                                                 </div>
+
+
                                                 <div class="col-auto">
-                                                    <form action="{{ route('Course.destroy', $lesson->id) }}" method="POST"
-                                                        onsubmit="return confirm('Are you sure you want to delete this course?');">
+                                                    <form action="{{ route('lesson.destroy', $lesson->id) }}" method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this lesson?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-sm btn-danger" type="submit">
@@ -86,6 +88,8 @@
                                                         </button>
                                                     </form>
                                                 </div>
+
+
                                                 <div class="col-auto">
                                                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                                         data-bs-target="#addTopicModal{{ $lesson->id }}">
