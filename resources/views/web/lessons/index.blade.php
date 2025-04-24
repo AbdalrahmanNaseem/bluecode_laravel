@@ -32,6 +32,7 @@
 
                                     <th class="text-center">Image</th>
                                     <th class="text-center">courses </th>
+                                    <th class="text-center">topiecs </th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,23 @@
                                             @endif
                                         </td>
                                         <th class="text-center"> {{ $lesson->course->name }} </th>
+
+                                        <th class="text-center">
+                                            @foreach ($lesson->topic as $lessonTopic)
+                                                <ul>
+                                                    <li class="text-center">
+                                                        {{ $lessonTopic->name }}
+
+
+                                                    <li class="text-center">
+                                                        @if ($lessonTopic->image)
+                                                            <img src="{{ asset('storage/' . $lessonTopic->image) }}"
+                                                                alt="course image" width="50">
+                                                        @endif
+                                                    </li>
+                                                </ul>
+                                            @endforeach
+                                        </th>
 
                                         <td class="text-center">
                                             <div class="row justify-content-center">
@@ -64,6 +82,12 @@
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </form>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#addTopicModal{{ $lesson->id }}">
+                                                        <span>Add Topic</span>
+                                                    </button>
                                                 </div>
 
                                             </div>
@@ -105,6 +129,40 @@
                                                                     data-bs-dismiss="modal">Close</button>
                                                                 <button type="submit"
                                                                     class="btn btn-primary">Update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Add Topic Modal -->
+                                            <div class="modal fade" id="addTopicModal{{ $lesson->id }}" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route('lessonsTopic.store') }}" method="POST"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" name="lesson_id"
+                                                                value="{{ $lesson->id }}">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Add Topic to {{ $lesson->name }}
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <label>Topic Name</label>
+                                                                <input class="form-control" name="name" type="text"
+                                                                    required><br>
+                                                                <label>Image</label>
+                                                                <input class="form-control" name="image"
+                                                                    type="file"><br>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Add
+                                                                    Topic</button>
                                                             </div>
                                                         </form>
                                                     </div>

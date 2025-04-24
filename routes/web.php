@@ -61,3 +61,11 @@ Route::get('lesson', [webController::class, 'lesson_index'])->name('lesson.index
 Route::post('lesson', [webController::class, 'lesson_store'])->name('lesson.store');
 Route::put('lesson/{id}', [webController::class, 'lesson_update'])->name('lesson.update');
 Route::delete('lesson/{id}', [webController::class, 'lesson_destroy'])->name('lesson.destroy');
+
+
+Route::post('/topic/store', [webController::class, 'lessonsTopic_store'])->name('lessonsTopic.store');
+
+Route::get('topic', [webController::class, 'topic_index'])->name('topic.index');
+Route::post('topic', [webController::class, 'topic_store'])->name('topic.store');
+Route::put('topic/{id}', [webController::class, 'topic_update'])->name('topic.update');
+Route::delete('topic/{id}', [webController::class, 'topic_destroy'])->name('topic.destroy');
