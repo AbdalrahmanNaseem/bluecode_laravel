@@ -25,6 +25,10 @@ class lesson extends Model
     {
         return $this->belongsTo(Course::class);
     }
+    public function topic()
+    {
+        return $this->hasMany(Topic::class);
+    }
     //     name
     // image
 }
