@@ -11,9 +11,7 @@ use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-
-
+use Illuminate\Support\Facades\Validator;
 
 class webController extends Controller
 {
@@ -77,7 +75,25 @@ class webController extends Controller
 
     public function Course_store(Request $request)
     {
-
+        $request->merge([
+            'user_id' => (int) $request->input('user_id'),
+        ]);
+        $validator = Validator::make($request->all(), [
+            'name'        => 'required|string|max:255|unique:courses,name',
+            'description' => 'required|string',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'user_id'     => 'required|integer|exists:users,id',
+            'type'        => 'required|string|max:100',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors'  => $validator->errors(),
+            ], 422);
+        }
+    
+        $data   = $validator->validated();
 
         $user = Auth::user();
 
@@ -90,13 +106,7 @@ class webController extends Controller
         }
 
 
-        Course::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'user_id' => $user->id,
-            'type' => $request->type,
-        ]);
+        Course::create($data);
 
         return redirect()->route('Course.index')->with('success', 'Course created successfully');
     }
