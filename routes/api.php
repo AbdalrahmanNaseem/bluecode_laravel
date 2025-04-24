@@ -15,4 +15,5 @@ Route::post('/login', [UserController::class, "login"]);
 Route::post('/register', [UserController::class, "register"]);
 
 Route::get('/courses', [CourseController::class, "index"]);
+Route::get('/lesson', [CourseController::class, "lesson_index"]);
 Route::post('/courses', [CourseController::class, "CreateCourse"]);

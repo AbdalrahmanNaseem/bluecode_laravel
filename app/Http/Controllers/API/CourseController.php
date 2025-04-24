@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\webController;
 use App\Models\Course;
+use App\Models\lesson;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -17,13 +18,19 @@ class CourseController extends Controller
         $courses = Course::all();
         return response($courses);
     }
+    public function lesson_index()
+    {
+
+        $lessons = lesson::all();
+        return response($lessons);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function CreateCourse(Request $request)
     {
-        
+
         $webCont = new WebController();
         $course  = $webCont->Course_store($request);
 
@@ -31,12 +38,12 @@ class CourseController extends Controller
             return response()->json([
                 'message' => 'Course created successfully! 🎉',
                 'course'  => $course,
-            ], 201); 
+            ], 201);
         }
 
         return response()->json([
             'message' => 'Failed to create course.',
-            
+
         ], 500);
     }
 

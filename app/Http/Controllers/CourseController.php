@@ -13,7 +13,12 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return response()->json([
+            'status' => true,
+            'message' => 'Courses retrieved successfully',
+            'data' => $courses
+        ]);
     }
 
     /**
