@@ -147,7 +147,7 @@
                         <label>Point</label>
                         <input class="form-control" name="point" type="number" min="0"><br>
 
-                        <label>Image (اختياري)</label>
+                        <label>Image </label>
                         <input class="form-control" name="image" type="file"><br>
 
                         <label>Topic</label>

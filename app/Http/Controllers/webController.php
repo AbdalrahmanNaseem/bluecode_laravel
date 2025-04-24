@@ -82,20 +82,22 @@ class webController extends Controller
             'name'        => 'required|string|max:255|unique:courses,name',
             'description' => 'required|string',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id'     => 'required|integer|exists:users,id',
             'type'        => 'required|string|max:100',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed.',
                 'errors'  => $validator->errors(),
             ], 422);
         }
-    
+
         $data   = $validator->validated();
 
         $user = Auth::user();
+
+
+
 
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -104,9 +106,14 @@ class webController extends Controller
             $request->image->move(public_path($destinationPath), $imageName);
             $imagePath = $destinationPath . '/' . $imageName;
         }
+        Course::create([
+            'name'        => $data['name'],
+            'description' => $data['description'],
+            'image'       => $imagePath,
+            'type'        => $data['type'],
+            'user_id'     => $user->id,
+        ]);
 
-
-        Course::create($data);
 
         return redirect()->route('Course.index')->with('success', 'Course created successfully');
     }
