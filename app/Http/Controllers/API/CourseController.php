@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\webController;
 use App\Models\Course;
 use App\Models\lesson;
+use App\Models\Question;
+use App\Models\Topic;
+use Database\Seeders\QuestionSeeder;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -23,6 +26,18 @@ class CourseController extends Controller
 
         $lessons = lesson::all();
         return response($lessons);
+    }
+
+    public function topics_index()
+    {
+        $topics = Topic::all();
+        return response($topics);
+    }
+
+    public function question_index()
+    {
+        $question = Question::all();
+        return response($question);
     }
 
     /**
