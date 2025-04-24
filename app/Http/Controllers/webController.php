@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Level;
+use App\Models\Question;
 use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -332,5 +334,124 @@ class webController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Topic added successfully.');
+    }
+
+
+    public function question_index()
+    {
+        $questions = Question::all();
+        $topics = Topic::all();
+        return view('web.question.index', compact('questions', 'topics'));
+    }
+
+    public function question_store(Request $request)
+    {
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'point' => 'required|numeric|min:0',
+            'topic_id' => 'required|exists:topics,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('questions', 'public');
+        }
+
+        Question::create([
+            'question' => $request->question,
+            'subject' => $request->subject,
+            'point' => $request->point,
+            'image' => $imagePath,
+            'topic_id' => $request->topic_id,
+        ]);
+
+        return redirect()->back()->with('success', 'Question added successfully.');
+    }
+
+
+    public function question_update(Request $request, $id)
+    {
+        $question = Question::findOrFail($id);
+
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'point' => 'required|numeric|min:0',
+            'topic_id' => 'required|exists:topics,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($question->image && Storage::disk('public')->exists($question->image)) {
+                Storage::disk('public')->delete($question->image);
+            }
+
+            $imagePath = $request->file('image')->store('questions', 'public');
+            $question->image = $imagePath;
+        }
+
+        $question->question = $request->question;
+        $question->point = $request->point;
+        $question->topic_id = $request->topic_id;
+        $question->save();
+
+        return redirect()->back()->with('success', 'Question updated successfully.');
+    }
+
+    public function question_destroy($id)
+    {
+        $question = Question::findOrFail($id);
+
+        if ($question->image && Storage::disk('public')->exists($question->image)) {
+            Storage::disk('public')->delete($question->image);
+        }
+
+        $question->delete();
+
+        return redirect()->back()->with('success', 'Question deleted successfully.');
+    }
+
+    public function answer_index()
+    {
+        $answers = Answer::with('question')->get();
+        $questions = Question::all();
+        return view('web.Answer.index', compact('answers', 'questions'));
+    }
+
+
+    public function answer_store(Request $request)
+    {
+        $request->validate([
+            'option' => 'required|string|max:255',
+            'is_correct' => 'required|boolean',
+            'question_id' => 'required|exists:questions,id',
+        ]);
+
+        Answer::create($request->all());
+
+        return redirect()->route('answer.index')->with('success', 'Answer added successfully!');
+    }
+
+    public function answer_update(Request $request, $id)
+    {
+        $request->validate([
+            'option' => 'required|string|max:255',
+            'is_correct' => 'required|boolean',
+            'question_id' => 'required|exists:questions,id',
+        ]);
+
+        $answer = Answer::findOrFail($id);
+        $answer->update($request->all());
+
+        return redirect()->route('answer.index')->with('success', 'Answer updated successfully!');
+    }
+
+    public function answer_destroy($id)
+    {
+        $answer = Answer::findOrFail($id);
+        $answer->delete();
+
+        return redirect()->route('answer.index')->with('success', 'Answer deleted successfully!');
     }
 }

@@ -69,3 +69,17 @@ Route::get('topic', [webController::class, 'topic_index'])->name('topic.index');
 Route::post('topic', [webController::class, 'topic_store'])->name('topic.store');
 Route::put('topic/{id}', [webController::class, 'topic_update'])->name('topic.update');
 Route::delete('topic/{id}', [webController::class, 'topic_destroy'])->name('topic.destroy');
+
+
+
+
+Route::get('question', [webController::class, 'question_index'])->name('question.index');
+Route::post('question', [webController::class, 'question_store'])->name('question.store');
+Route::put('question/{id}', [webController::class, 'question_update'])->name('question.update');
+Route::delete('question/{id}', [webController::class, 'question_destroy'])->name('question.destroy');
+
+
+Route::get('answer', [webController::class, 'answer_index'])->name('answer.index');
+Route::post('answer', [webController::class, 'answer_store'])->name('answer.store');
+Route::put('answer/{id}', [webController::class, 'answer_update'])->name('answer.update');
+Route::delete('answer/{id}', [webController::class, 'answer_destroy'])->name('answer.destroy');

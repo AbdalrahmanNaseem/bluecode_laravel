@@ -86,6 +86,11 @@
                                     <span class="sub-item">lesons</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('topic.index') }}">
+                                    <span class="sub-item">topic</span>
+                                </a>
+                            </li>
 
                         </ul>
                     </div>
