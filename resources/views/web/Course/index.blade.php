@@ -233,8 +233,8 @@
                         <input class="form-control" name="image" type="file">
                         <label for="type">Type</label>
                         <select class="form-control" name="type" id="type">
-                            <option value="core">Core modules</option>
-                            <option value="learn">Learn Module</option>
+                            <option value="Core Modules">Core modules</option>
+                            <option value="Learn Module">Learn Module</option>
                         </select>
 
                     </div>

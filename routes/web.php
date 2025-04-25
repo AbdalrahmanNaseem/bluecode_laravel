@@ -83,3 +83,12 @@ Route::get('answer', [webController::class, 'answer_index'])->name('answer.index
 Route::post('answer', [webController::class, 'answer_store'])->name('answer.store');
 Route::put('answer/{id}', [webController::class, 'answer_update'])->name('answer.update');
 Route::delete('answer/{id}', [webController::class, 'answer_destroy'])->name('answer.destroy');
+
+
+
+Route::get('challenge', [webController::class, 'challenge_index'])->name('challenge.index');
+Route::post('challenge', [webController::class, 'challenge_store'])->name('challenge.store');
+Route::put('challenge/{id}', [webController::class, 'challenge_update'])->name('challenges.update');
+Route::delete('challenge/{id}', [webController::class, 'challenge_destroy'])->name('challenge.destroy');
+
+Route::get('challenge/{id}', [webController::class, 'challenge_reports'])->name('challenge.reports');

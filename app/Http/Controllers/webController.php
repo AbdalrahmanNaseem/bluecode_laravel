@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Challenge;
 use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Level;
@@ -473,5 +474,88 @@ class webController extends Controller
         $answer->delete();
 
         return redirect()->route('answer.index')->with('success', 'Answer deleted successfully!');
+    }
+
+
+
+    public function challenge_index()
+    {
+        $challenges = Challenge::all();
+        return view('web.Challenge.index', compact('challenges'));
+    }
+
+    public function challenge_store(Request $request)
+    {
+
+
+        $user = Auth::user();
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/lessons'), $imageName);
+            $imagePath = 'uploads/lessons/' . $imageName;
+        }
+
+        // dd($user);
+
+        Challenge::create([
+            'name' => $request->name,
+            'vm_download_link' => $request->vm_download_link,
+            'points' => $request->points,
+            'description' => $request->description,
+            'image' => $imagePath,
+            'difficulty' => $request->difficulty,
+            'user_id' => $user->id,
+
+        ]);
+
+        return redirect()->back()->with('success', 'Challenge created successfully!');
+    }
+
+
+    public function challenge_update(Request $request, $id)
+    {
+        $challenge = Challenge::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/lessons'), $imageName);
+            $imagePath = 'uploads/lessons/' . $imageName;
+
+            if ($challenge->image && file_exists(public_path($challenge->image))) {
+                unlink(public_path($challenge->image));
+            }
+
+            $challenge->image = $imagePath;
+        }
+
+        $challenge->name = $request->name;
+        $challenge->description = $request->description;
+
+        if ($request->has('vm_download_link')) {
+            $challenge->vm_download_link = $request->vm_download_link;
+        }
+
+        if ($request->has('difficulty')) {
+            $challenge->difficulty = $request->difficulty;
+        }
+
+        if ($request->has('points')) {
+            $challenge->points = $request->points;
+        }
+
+        $challenge->save();
+
+        return redirect()->back()->with('success', 'Challenge updated successfully!');
+    }
+    public function challenge_reports($id)
+    {
+        $challenge = Challenge::whete($id)->first();
+
+
+
+        return view('web.Challenge.reports', compact('reports', 'challenge'));
     }
 }
