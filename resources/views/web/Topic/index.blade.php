@@ -98,6 +98,9 @@
                                                                 <label>Name</label>
                                                                 <input class="form-control" name="name" type="text"
                                                                     value="{{ $topic->name }}"><br>
+                                                                <label>supject</label>
+                                                                <input class="form-control" name="supject" type="text"
+                                                                    value="{{ $topic->supject }}"><br>
 
                                                                 <label>Image</label>
                                                                 <input class="form-control" name="image"
@@ -149,6 +152,8 @@
                     <div class="modal-body">
                         <label>Name</label>
                         <input class="form-control" name="name" type="text"><br>
+                        <label>supject</label>
+                        <input class="form-control" name="supject" type="text"><br>
 
                         <label>Image</label>
                         <input class="form-control" name="image" type="file"><br>

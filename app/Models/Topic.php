@@ -14,6 +14,7 @@ class Topic extends Model
         'image',
         'lesson_id',
         'user_id',
+        'supject',
 
 
     ];

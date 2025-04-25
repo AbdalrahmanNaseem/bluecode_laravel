@@ -289,6 +289,7 @@ class webController extends Controller
             'name' => $request->name,
             'image' => $imagePath,
             'lesson_id' => $request->lesson_id,
+            'supject' => $request->supject,
             'user_id' => $user->id,
         ]);
 
@@ -302,24 +303,30 @@ class webController extends Controller
             'name' => 'required|string|max:255',
             'lesson_id' => 'required|exists:lessons,id',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'supject' => 'nullable|string|max:255',
         ]);
 
-        $topic->name = $request->name;
-        $topic->lesson_id = $request->lesson_id;
 
+        $imagePath = $topic->image;
         if ($request->hasFile('image')) {
             if ($topic->image && Storage::disk('public')->exists($topic->image)) {
                 Storage::disk('public')->delete($topic->image);
             }
 
-            $path = $request->file('image')->store('topics', 'public');
-            $topic->image = $path;
+            $imagePath = $request->file('image')->store('topics', 'public');
         }
-
-        $topic->save();
+        $user = Auth::user();
+        Topic::where('id', $id)->update([
+            'name' => $request->name,
+            'lesson_id' => $request->lesson_id,
+            'supject' => $request->supject,
+            'image' => $imagePath,
+            'user_id' => $user->id,
+        ]);
 
         return back()->with('success', 'Topic updated successfully.');
     }
+
     public function topic_destroy($id)
     {
         $topic = Topic::findOrFail($id);
