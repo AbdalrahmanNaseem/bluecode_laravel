@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('challenges', function (Blueprint $table) {
+        Schema::create('challenge_subissions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-            $table->string('description');
-            $table->string('image')->nullable();
-            $table->string('vm_download_link')->nullable();
-            $table->enum('difficulty', ['easy', 'medium', 'hard']);
-            $table->integer('points')->default(0);
             $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Challenge::class);
+            $table->text('report_file_path');
+            $table->string('status')->default('pending')->comment('one of: pending, accepted, rejected');
+            $table->text('admin_feedback')->nullable();
+            $table->timestamp('submitted_at')->useCurrent();
+
+
+
 
 
             $table->timestamps();
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('challenges');
+        Schema::dropIfExists('challenge_subissions');
     }
 };
