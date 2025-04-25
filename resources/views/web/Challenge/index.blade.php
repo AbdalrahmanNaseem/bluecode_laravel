@@ -1,6 +1,8 @@
-@extends('layout.layout')
+@extends('web.layout.layout')
 
 @section('contant')
+    <p>Welcome to the dashboard!</p>
+
     <div class="pt-2 pb-4 d-flex align-items-left align-items-md-center flex-column flex-md-row">
         <div>
             <h3 class="mb-3 fw-bold">Dashboard</h3>
@@ -63,13 +65,7 @@
                                                 </div>
 
 
-                                                <div class="col-md-4 ">
-                                                    <a class="btn btn-sm btn-info"
-                                                        href="{{ route('challenge.reports', ['id' => $challenge->id]) }}">
-                                                        <i class="bi bi-info-circle"></i>
-                                                    </a>
 
-                                                </div>
 
 
                                                 <div class="col-md-4 ">
@@ -162,6 +158,8 @@
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

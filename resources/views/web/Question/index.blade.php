@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('web.layout.layout')
 
 @section('contant')
     <div class="pt-2 pb-4 d-flex align-items-left align-items-md-center flex-column flex-md-row">

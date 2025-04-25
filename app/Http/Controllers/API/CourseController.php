@@ -105,7 +105,7 @@ class CourseController extends Controller
         return response($answer);
     }
 
-    
+
     public function CreateCourse(Request $request)
     {
 
@@ -152,8 +152,5 @@ class CourseController extends Controller
             'lesson' => $lesson,
             'topics' => $topics
         ], 200);
-    }
-    public function add_score_to_the_user(Request $request){
-        
     }
 }

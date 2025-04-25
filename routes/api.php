@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\adminDashboard;
 use App\Http\Controllers\API\CourseController;
+// use App\Http\Controllers\API\CourseController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\CourseController as ControllersCourseController;
 
@@ -25,5 +26,7 @@ Route::get('/topic/{id}', [CourseController::class, "get_topic_by_lessonId"]);
 Route::get('/question', [CourseController::class, "question_index"]);
 Route::get('/lessenQuestions/{id}', [CourseController::class, "get_questions_and_topic_by_lessenId"]);
 Route::post('/answer', [CourseController::class, "add_score_to_the_user"]);
+
+Route::post('/user/answers', [CourseController::class, 'storeUserAnswer']);
 
 // Route::get("/answers")

@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('web.layout.layout')
 
 @section('contant')
     <div class="pt-2 pb-4 d-flex align-items-left align-items-md-center flex-column flex-md-row">
@@ -29,6 +29,7 @@
                                 <tr>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Name</th>
+                                    <th class="text-center">supject</th>
 
                                     <th class="text-center">Image</th>
                                     <th class="text-center">lessons </th>
@@ -40,6 +41,7 @@
                                     <tr>
                                         <td class="text-center">{{ $topic->id }}</td>
                                         <td class="text-center">{{ $topic->name }}</td>
+                                        <td class="text-center">{{ $topic->supject }}</td>
                                         <td class="text-center">
                                             @if ($topic->image)
                                                 <img src="{{ asset('storage/' . $topic->image) }}" alt="course image"
@@ -50,9 +52,9 @@
                                             <th class="text-center"> {{ $topic->lesson->name }} </th>
                                         @endif
 
-                                        @foreach ($topic->questions as $topicQuestion)
+                                        {{-- @foreach ($topic->questions as $topicQuestion)
                                             <th class="text-center"> {{ $topicQuestion->name }} </th>
-                                        @endforeach
+                                        @endforeach --}}
 
 
 
@@ -98,6 +100,9 @@
                                                                 <label>Name</label>
                                                                 <input class="form-control" name="name" type="text"
                                                                     value="{{ $topic->name }}"><br>
+                                                                <label>supject</label>
+                                                                <input class="form-control" name="supject" type="text"
+                                                                    value="{{ $topic->supject }}"><br>
 
                                                                 <label>Image</label>
                                                                 <input class="form-control" name="image"
@@ -149,6 +154,8 @@
                     <div class="modal-body">
                         <label>Name</label>
                         <input class="form-control" name="name" type="text"><br>
+                        <label>supject</label>
+                        <input class="form-control" name="supject" type="text"><br>
 
                         <label>Image</label>
                         <input class="form-control" name="image" type="file"><br>

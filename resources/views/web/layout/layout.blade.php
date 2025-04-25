@@ -45,26 +45,26 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        @include('layout.sidebar')
+        @include('web.layout.sidebar')
         <!-- End Sidebar -->
 
         <div class="main-panel">
-            @include('layout.nav')
+            @include('web.layout.nav')
 
             <div class="container">
                 <div class="page-inner">
 
 
 
-                    <!-- ///////////////////////////// -->
                     @yield('contant')
-                    <!-- ///////////////////////////// -->
+
+
 
 
                 </div>
             </div>
 
-            @include('layout.footer')
+            @include('web.layout.footer')
         </div>
     </div>
 

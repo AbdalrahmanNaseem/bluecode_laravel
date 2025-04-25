@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('user_answers', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->text('supject');
-            $table->foreignIdFor(\Illuminate\Foundation\Auth\User::class);
-            $table->foreignIdFor(\App\Models\lesson::class);
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Question::class);
+            $table->foreignIdFor(\App\Models\Answer::class);
+            $table->boolean('is_correct')->default(false);
+
 
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('user_answers');
     }
 };
