@@ -50,6 +50,12 @@
                                             <th class="text-center"> {{ $topic->lesson->name }} </th>
                                         @endif
 
+                                        @foreach ($topic->questions as $topicQuestion)
+                                            <th class="text-center"> {{ $topicQuestion->name }} </th>
+                                        @endforeach
+
+
+
                                         <td class="text-center">
                                             <div class="row justify-content-center">
                                                 <div class="col-auto">
