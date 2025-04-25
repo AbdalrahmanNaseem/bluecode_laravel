@@ -51,7 +51,7 @@
                                         @endif
 
                                         @foreach ($topic->questions as $topicQuestion)
-                                            <th class="text-center"> {{ $topicQuestion->question->name }} </th>
+                                            <th class="text-center"> {{ $topicQuestion->name }} </th>
                                         @endforeach
 
 
