@@ -29,6 +29,7 @@
                                 <tr>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Name</th>
+                                    <th class="text-center">supject</th>
 
                                     <th class="text-center">Image</th>
                                     <th class="text-center">lessons </th>
@@ -40,6 +41,7 @@
                                     <tr>
                                         <td class="text-center">{{ $topic->id }}</td>
                                         <td class="text-center">{{ $topic->name }}</td>
+                                        <td class="text-center">{{ $topic->supject }}</td>
                                         <td class="text-center">
                                             @if ($topic->image)
                                                 <img src="{{ asset('storage/' . $topic->image) }}" alt="course image"

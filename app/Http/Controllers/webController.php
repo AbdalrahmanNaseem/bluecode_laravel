@@ -303,7 +303,6 @@ class webController extends Controller
             'name' => 'required|string|max:255',
             'lesson_id' => 'required|exists:lessons,id',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-            'supject' => 'nullable|string|max:255',
         ]);
 
 
