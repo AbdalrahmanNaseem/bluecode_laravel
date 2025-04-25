@@ -1,6 +1,5 @@
-@extends('layout.layout')
+@extends('web.layout.layout')
 
 @section('contant')
-laset of  roole
-
+    laset of roole
 @endsection

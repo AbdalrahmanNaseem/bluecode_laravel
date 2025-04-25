@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('web.layout.layout')
 
 @section('contant')
     <div class="pt-2 pb-4 d-flex align-items-left align-items-md-center flex-column flex-md-row">
@@ -50,9 +50,9 @@
                                             <th class="text-center"> {{ $topic->lesson->name }} </th>
                                         @endif
 
-                                        @foreach ($topic->questions as $topicQuestion)
+                                        {{-- @foreach ($topic->questions as $topicQuestion)
                                             <th class="text-center"> {{ $topicQuestion->name }} </th>
-                                        @endforeach
+                                        @endforeach --}}
 
 
 

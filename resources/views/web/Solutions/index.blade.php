@@ -1,5 +1,5 @@
 @extends('web.layout.layout')
 
 @section('contant')
-    <p>Welcome to the dashboard!</p>
+    <h2>التحدي رقم {{ $challenge->id }}</h2>
 @endsection
