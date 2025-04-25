@@ -361,7 +361,7 @@ class webController extends Controller
     {
         $questions = Question::all();
         $topics = Topic::all();
-        return view('web.question.index', compact('questions', 'topics'));
+        return view('web.Question.index', compact('questions', 'topics'));
     }
 
     public function question_store(Request $request)

@@ -18,5 +18,8 @@ Route::get('/lessonsCourse/{id}',[CourseController::class,"get_lessen_by_courseI
 
 
 Route::get('/topic', [CourseController::class, "topics_index"]);
+Route::get('/topic/{id}',[CourseController::class,"get_topic_by_lessonId"]);
 
 Route::get('/question', [CourseController::class, "question_index"]);
+Route::get('/lessenQuestions/{id}',[CourseController::class,"get_questions_and_topic_by_lessenId"]);
+// Route::get("/answers")
