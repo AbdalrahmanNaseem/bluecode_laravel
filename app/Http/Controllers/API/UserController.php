@@ -34,14 +34,14 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|exists:users,name',
+            'email' => 'required|string|exists:users,email',
             'password' => 'required|string',
         ]);
 
-        $user = User::where('name', $data['name'])->first();
+        $user = User::where('email', $data['email'])->first();
 
         if (! Hash::check($data['password'], $user->password)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json(['message' => ' ancourect password '], 401);
         }
 
         return response()->json([
@@ -65,12 +65,12 @@ class UserController extends Controller
         }
 
         $data = $validator->validated();
-        if (User::where('name', $data['name'])->exists()) {
-            return response()->json([
-                'message' => 'username is exist'
-            ], 422);
-        }
-        
+        // if (User::where('name', $data['name'])->exists()) {
+        //     return response()->json([
+        //         'message' => 'username is exist'
+        //     ], 422);
+        // }
+
         if (User::where('email', $data['email'])->exists()) {
             return response()->json([
                 'message' => 'email is exist'
