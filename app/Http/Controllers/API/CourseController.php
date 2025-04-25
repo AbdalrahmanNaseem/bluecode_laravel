@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\webController;
+use App\Models\Answer;
 use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Question;
@@ -45,6 +46,12 @@ class CourseController extends Controller
     {
         $question = Question::all();
         return response($question);
+    }
+
+    public function answer_index()
+    {
+        $answer = Answer::all();
+        return response($answer);
     }
 
     /**

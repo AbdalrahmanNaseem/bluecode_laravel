@@ -21,3 +21,5 @@ Route::post('/courses', [CourseController::class, "CreateCourse"]);
 Route::get('/topic', [CourseController::class, "topics_index"]);
 
 Route::get('/question', [CourseController::class, "question_index"]);
+
+Route::get('/answer', [CourseController::class, "answer_index"]);
