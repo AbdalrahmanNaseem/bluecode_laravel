@@ -550,10 +550,15 @@ class webController extends Controller
 
         return redirect()->back()->with('success', 'Challenge updated successfully!');
     }
+
+
+
     public function challenge_reports($id)
     {
-        $challenge = Challenge::where('id', $id)->first();
 
+
+        $challenge = Challenge::findOrFail($id);
+        // dd($challenge);
 
 
         return view('web.Challenge.reports', compact('challenge'));

@@ -66,9 +66,9 @@
                                                 <div class="col-md-4 ">
                                                     <a class="btn btn-sm btn-info"
                                                         href="{{ route('challenge.reports', ['id' => $challenge->id]) }}">
-
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>
+
                                                 </div>
 
 
