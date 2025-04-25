@@ -14,9 +14,6 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $courses = Course::all();
@@ -28,7 +25,6 @@ class CourseController extends Controller
         $lessons = lesson::all();
         return response($lessons);
     }
-
     public function topics_index()
     {
         $topics = Topic::all();
@@ -109,9 +105,7 @@ class CourseController extends Controller
         return response($answer);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function CreateCourse(Request $request)
     {
 

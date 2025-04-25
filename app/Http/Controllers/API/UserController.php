@@ -7,30 +7,74 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use function PHPUnit\Framework\returnSelf;
 
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function all_users()
     {
-        //
+        $users = User::all();
+        return response()->json($users, 200);
+    }
+    public function update_user_info(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            "name" => 'nullable|string|min:4',
+            'email' => 'nullable|email|unique:users,email,' . $request->user_id,
+            'old_password' => 'nullable|string',
+            'new_password' => 'nullable|string|min:8|required_with:old_password',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        $data = $validator->validated();
+
+        $user = User::find($request->id);
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found'
+            ], 404);
+        }
+        if (isset($data['name'])) $user->name = $data['name'];
+        if (isset($data['email'])) $user->email = $data['email'];
+        if (isset($data['country'])) $user->country = $data['country'];
+
+        if (!empty($data['old_password'])  && !empty($data['new_password'])) {
+            if (!Hash::check($data['old_password'], $user->password)) {
+                return response()->json([
+                    'message' => 'Old password is incorrect'
+                ], 400);
+            }
+
+            $user->password = Hash::make($data['new_password']);
+        }
+
+
+        $user->save();
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user' => $user
+        ], 200);
+    }
+    public function get_user_by_id($id)
+    {
+        $user = User::find($id);
+        if (empty($user)) {
+            return response()->json([
+                "message" => "user is not found"
+            ], 404);
+        }
+        return response($user);
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
     public function login(Request $request)
     {
         $data = $request->validate([
@@ -80,20 +124,5 @@ class UserController extends Controller
             'message' => 'register success',
             'user'    => $user,
         ], 201);
-    }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
