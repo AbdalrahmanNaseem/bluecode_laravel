@@ -20,4 +20,3 @@ Route::get('/lessonsCourse/{id}',[CourseController::class,"get_lessen_by_courseI
 Route::get('/topic', [CourseController::class, "topics_index"]);
 
 Route::get('/question', [CourseController::class, "question_index"]);
-
