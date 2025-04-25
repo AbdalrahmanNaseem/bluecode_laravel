@@ -153,4 +153,7 @@ class CourseController extends Controller
             'topics' => $topics
         ], 200);
     }
+    public function add_score_to_the_user(Request $request){
+        
+    }
 }
