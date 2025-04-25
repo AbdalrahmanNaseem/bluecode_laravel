@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('supject')->nullable();
             $table->foreignIdFor(\Illuminate\Foundation\Auth\User::class);
             $table->foreignIdFor(\App\Models\lesson::class);
 

@@ -105,7 +105,7 @@ class CourseController extends Controller
         return response($answer);
     }
 
-    
+
     public function CreateCourse(Request $request)
     {
 
@@ -151,6 +151,21 @@ class CourseController extends Controller
         return response()->json([
             'lesson' => $lesson,
             'topics' => $topics
+        ], 200);
+    }
+    public function storeUserAnswer(Request $request)
+    {
+        $question = Question::find($request->question_id);
+
+        if (!$question) {
+            return response()->json([
+                'message' => 'Question not found'
+            ], 404);
+        }
+        $answers = Answer::where('question_id', $request->question_id)->get();
+        return response()->json([
+            'question' => $question,
+            'answers' => $answers
         ], 200);
     }
 }

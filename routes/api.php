@@ -25,4 +25,6 @@ Route::get('/topic/{id}', [CourseController::class, "get_topic_by_lessonId"]);
 Route::get('/question', [CourseController::class, "question_index"]);
 Route::get('/lessenQuestions/{id}', [CourseController::class, "get_questions_and_topic_by_lessenId"]);
 
+Route::post('/answers/user', [CourseController::class, 'storeUserAnswer']);
+
 // Route::get("/answers")
