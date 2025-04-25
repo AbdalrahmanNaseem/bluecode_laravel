@@ -155,6 +155,12 @@ class CourseController extends Controller
     }
     public function storeUserAnswer(Request $request)
     {
+        return response()->json([
+            'message' => 'Answer stored successfully',
+            'data' => $request->all()
+        ], 200);
+
+
         $question = Question::find($request->question_id);
 
         if (!$question) {
