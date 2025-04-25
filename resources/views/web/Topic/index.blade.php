@@ -46,7 +46,9 @@
                                                     width="50">
                                             @endif
                                         </td>
-                                        <th class="text-center"> {{ $topic->lesson->name }} </th>
+                                        @if ($topic->lesson)
+                                            <th class="text-center"> {{ $topic->lesson->name }} </th>
+                                        @endif
 
                                         <td class="text-center">
                                             <div class="row justify-content-center">

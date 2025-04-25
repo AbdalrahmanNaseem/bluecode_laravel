@@ -30,8 +30,4 @@ class Question extends Model
     }
 
 
-    //
-    //
-    //
-    //
 }

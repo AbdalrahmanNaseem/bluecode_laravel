@@ -65,18 +65,12 @@ class UserController extends Controller
         }
 
         $data = $validator->validated();
-        // if (User::where('name', $data['name'])->exists()) {
-        //     return response()->json([
-        //         'message' => 'username is exist'
-        //     ], 422);
-        // }
 
         if (User::where('email', $data['email'])->exists()) {
             return response()->json([
                 'message' => 'email is exist'
             ], 422);
         }
-
 
         $data['password'] = Hash::make($data['password']);
 
