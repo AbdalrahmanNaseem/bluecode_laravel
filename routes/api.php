@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\adminDashboard;
 use App\Http\Controllers\API\CourseController;
+// use App\Http\Controllers\API\CourseController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\CourseController as ControllersCourseController;
 
