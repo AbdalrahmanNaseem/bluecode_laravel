@@ -11,6 +11,7 @@ use App\Models\Question;
 use App\Models\Topic;
 use Database\Seeders\QuestionSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -152,5 +153,21 @@ class CourseController extends Controller
             'lesson' => $lesson,
             'topics' => $topics
         ], 200);
+    }
+    public function add_score_to_the_user(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required,',
+            "question_id" => 'required',
+            'answer_id' => 'required' ,
+            'is_correct' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
     }
 }
