@@ -45,7 +45,62 @@ class CourseController extends Controller
     public function question_index()
     {
         $question = Question::all();
-        return response($question);
+        return response(content: $question);
+    }
+    public function get_questions_and_topic_by_lessenId($id)
+    {
+        $topics = Topic::where('lesson_id', $id)->get();
+
+        if ($topics->isEmpty()) {
+            return response()->json([
+                'message' => 'No topics found for this lesson'
+            ], 404);
+        }
+
+        $topicIds = $topics->pluck('id');
+
+        $questions = Question::whereIn('topic_id', $topicIds)->get();
+
+        if ($questions->isEmpty()) {
+            return response()->json([
+                'message' => 'No questions found for these topics'
+            ], 404);
+        }
+
+        $questionIds = $questions->pluck('id');
+
+        $answers = Answer::whereIn('question_id', $questionIds)->get();
+
+        $questionsWithAnswers = $questions->map(function ($question) use ($answers) {
+            $question->answers = $answers->where('question_id', $question->id)->values();
+            return $question;
+        });
+        $questionsWithAnswers = $questions->map(function ($question) use ($answers) {
+            $question->answers = $answers->where('question_id', $question->id)->values();
+            return $question;
+        });
+
+        $unansweredQuestions = $questionsWithAnswers->filter(function ($question) {
+            return $question->answers->isEmpty();
+        });
+
+        if ($unansweredQuestions->isNotEmpty()) {
+            $unansweredNames = $unansweredQuestions->pluck('question');
+
+            return response()->json([
+                'message' => 'Some questions have no answers ',
+                'unanswered_questions' => $unansweredNames
+            ], 400);
+        }
+
+        $topicsWithQuestions = $topics->map(function ($topic) use ($questionsWithAnswers) {
+            $topic->questions = $questionsWithAnswers->where('topic_id', $topic->id)->values();
+            return $topic;
+        });
+
+        return response()->json([
+            'topics' => $topicsWithQuestions
+        ], 200);
     }
 
     public function answer_index()
@@ -65,7 +120,7 @@ class CourseController extends Controller
 
         if ($course instanceof Course) {
             return response()->json([
-                'message' => 'Course created successfully! 🎉',
+                'message' => 'Course created successfully',
                 'course'  => $course,
             ], 201);
         }
@@ -75,11 +130,6 @@ class CourseController extends Controller
 
         ], 500);
     }
-
-
-    /**
-     * Display the specified resource.
-     */
     public function get_lessen_by_courseId($id)
     {
 
@@ -95,25 +145,18 @@ class CourseController extends Controller
             'lessons' => $lessons
         ], 200);
     }
-    
-    public function show(string $id)
+    public function get_topic_by_lessonId($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $lesson = lesson::find($id);
+        if (!$lesson) {
+            return response()->json([
+                'message' => 'lesson not found'
+            ], 404);
+        }
+        $topics = Topic::where('lesson_id', $id)->get();
+        return response()->json([
+            'lesson' => $lesson,
+            'topics' => $topics
+        ], 200);
     }
 }

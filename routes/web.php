@@ -91,4 +91,4 @@ Route::post('challenge', [webController::class, 'challenge_store'])->name('chall
 Route::put('challenge/{id}', [webController::class, 'challenge_update'])->name('challenges.update');
 Route::delete('challenge/{id}', [webController::class, 'challenge_destroy'])->name('challenge.destroy');
 
-Route::get('challenge/{id}', [webController::class, 'challenge_reports'])->name('challenge.reports');
+Route::get('challenge/{id}/reports', [webController::class, 'challenge_reports'])->name('challenge.reports');

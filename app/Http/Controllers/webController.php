@@ -362,7 +362,7 @@ class webController extends Controller
     {
         $questions = Question::all();
         $topics = Topic::all();
-        return view('web.question.index', compact('questions', 'topics'));
+        return view('web.Question.index', compact('questions', 'topics'));
     }
 
     public function question_store(Request $request)
@@ -552,10 +552,10 @@ class webController extends Controller
     }
     public function challenge_reports($id)
     {
-        $challenge = Challenge::whete($id)->first();
+        $challenge = Challenge::where('id', $id)->first();
 
 
 
-        return view('web.Challenge.reports', compact('reports', 'challenge'));
+        return view('web.Challenge.reports', compact('challenge'));
     }
 }

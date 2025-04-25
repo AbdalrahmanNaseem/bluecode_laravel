@@ -57,15 +57,17 @@
                                         <td class="">
                                             <div class="row ">
                                                 <div class="col-md-4 ">
-                                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                                         data-bs-target="#editModal{{ $challenge->id }}">
-                                                        <i class="bi bi-info-circle"></i> </button>
+                                                        <i class="bi bi-pencil-square"></i> </button>
                                                 </div>
-                                                <div class="col-md-4 ">
-                                                    <a class="btn btn-sm btn-warning"
-                                                        href="{{ route('challenge.reports') }}" {{ $challenge->id }}>
 
-                                                        <i class="bi bi-pencil-square"></i>
+
+                                                <div class="col-md-4 ">
+                                                    <a class="btn btn-sm btn-info"
+                                                        href="{{ route('challenge.reports', ['id' => $challenge->id]) }}">
+
+                                                        <i class="bi bi-info-circle"></i>
                                                     </a>
                                                 </div>
 
