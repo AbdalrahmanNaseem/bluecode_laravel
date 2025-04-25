@@ -69,9 +69,26 @@ class CourseController extends Controller
         ], 500);
     }
 
+
     /**
      * Display the specified resource.
      */
+    public function get_lessen_by_courseId($id)
+    {
+
+        $course = Course::find($id);
+        if (!$course) {
+            return response()->json([
+                'message' => 'Course not found'
+            ], 404);
+        }
+        $lessons = Lesson::where('course_id', $id)->get();
+        return response()->json([
+            'course' => $course,
+            'lessons' => $lessons
+        ], 200);
+    }
+    
     public function show(string $id)
     {
         //
