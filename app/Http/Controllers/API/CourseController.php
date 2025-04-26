@@ -9,6 +9,8 @@ use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Question;
 use App\Models\Topic;
+use App\Models\User;
+use App\Models\UserAnswer;
 use Database\Seeders\QuestionSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -157,10 +159,9 @@ class CourseController extends Controller
     public function add_score_to_the_user(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required,',
-            "question_id" => 'required',
-            'answer_id' => 'required' ,
-            'is_correct' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'question_id' => 'required|exists:questions,id',
+            'answer_id' => 'required|exists:answers,id',
         ]);
 
         if ($validator->fails()) {
@@ -169,5 +170,33 @@ class CourseController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
+        $user = User::find($request->user_id);
+        $question = Question::find($request->question_id);
+
+        if (!$user || !$question) {
+            return response()->json([
+                'message' => 'User or Question not found'
+            ], 404);
+        }
+
+        // $points = $question->point;
+        // $points += $question->point;
+
+        // $user->update([
+        //     "points" => $points
+        // ]);
+        $user->points += $question->point;
+        $user->save();
+        UserAnswer::create([
+            'user_id' => $user->id,
+            'question_id' => $question->id,
+            'answer_id' => $request->answer_id,
+        ]);
+
+
+        return response()->json([
+            'message' => 'Score updated successfully',
+            'user' => $user
+        ], 200);
     }
 }
