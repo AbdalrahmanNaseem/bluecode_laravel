@@ -290,10 +290,11 @@ class CourseController extends Controller
                 ];
             });
 
-
+        $user_Id = User::find($request->user_id);
         return response()->json([
             'lessons_progress' => $lessonsProgress,
             'challenges' => $challenges,
+            'user_Id' => $user_Id->id,
         ]);
     }
 
