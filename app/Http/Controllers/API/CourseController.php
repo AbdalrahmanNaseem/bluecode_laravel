@@ -9,6 +9,7 @@ use App\Models\Challenge;
 use App\Models\ChallengeSubission;
 use App\Models\Course;
 use App\Models\lesson;
+use App\Models\Level;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Models\User;
@@ -291,10 +292,13 @@ class CourseController extends Controller
             });
 
         $user_Id = User::find($request->user_id);
+        $userPoint =  $user_Id->points;
+        $levels = Level::all();
         return response()->json([
             'lessons_progress' => $lessonsProgress,
             'challenges' => $challenges,
-            'user_Id' => $user_Id->id,
+            'userPoint' => $userPoint,
+            'AllLevels' => $levels,
         ]);
     }
 
