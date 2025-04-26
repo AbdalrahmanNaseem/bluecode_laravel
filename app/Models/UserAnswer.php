@@ -13,13 +13,14 @@ class UserAnswer extends Model
         'user_id',
         'question_id',
         'answer_id',
-        'is_correct',
+
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function question()
+    public function questio()
     {
         return $this->belongsTo(Question::class);
     }

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Challenge;
+use App\Models\ChallengeSubission;
 use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Level;
 use App\Models\Question;
 use App\Models\Topic;
 use App\Models\User;
+use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -555,5 +557,41 @@ class webController extends Controller
         $challenge->save();
 
         return redirect()->back()->with('success', 'Challenge updated successfully!');
+    }
+
+    public function challenge_reports()
+    {
+        $challenges_submitted = ChallengeSubission::all();
+        return view('web.Challenge.reports', compact('challenges_submitted'));
+    }
+    public function User_Answer()
+    {
+        $userAnswers = UserAnswer::all();
+        return view('web.Solutions.index', compact('userAnswers'));
+    }
+
+    public function challenge_destroy($id)
+    {
+        $challenge = Challenge::findOrFail($id);
+
+        if ($challenge->image && file_exists(public_path($challenge->image))) {
+            unlink(public_path($challenge->image));
+        }
+
+        $challenge->delete();
+
+        return redirect()->back()->with('success', 'Challenge deleted successfully!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $submission = ChallengeSubission::findOrFail($id);
+
+        $submission->update([
+            'admin_feedback' => $request->admin_feedback,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back()->with('success', 'Submission updated successfully.');
     }
 }

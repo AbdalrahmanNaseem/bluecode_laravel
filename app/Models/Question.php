@@ -28,6 +28,4 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
-
-
 }

@@ -23,4 +23,8 @@ class Challenge extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function challengeSubissions()
+    {
+        return $this->hasMany(ChallengeSubission::class);
+    }
 }

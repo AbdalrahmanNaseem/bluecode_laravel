@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\webController;
 use App\Models\Answer;
+use App\Models\Challenge;
+use App\Models\ChallengeSubission;
 use App\Models\Course;
 use App\Models\lesson;
 use App\Models\Question;
@@ -27,6 +29,12 @@ class CourseController extends Controller
 
         $lessons = lesson::all();
         return response($lessons);
+    }
+    public function challeng_index()
+    {
+
+        $challengs = Challenge::all();
+        return response($challengs);
     }
     public function topics_index()
     {
@@ -225,5 +233,89 @@ class CourseController extends Controller
             'user' => $user,
             'answers' => $answers,
         ], 200);
+    }
+    public function getUserProgress(Request $request)
+    {
+        $userId = $request->input('user_id');
+
+
+        $lessonsProgress = [];
+
+        $userAnswers = UserAnswer::where('user_id', $userId)
+            ->with('questio.topic.lesson')
+            ->get();
+
+        $groupedByLesson = $userAnswers->groupBy(function ($answer) {
+            return $answer->questio->topic->lesson->id ?? null;
+        });
+
+        foreach ($groupedByLesson as $lessonId => $answers) {
+            if ($lessonId === null) continue;
+
+            $lessonName = $answers->first()->questio->topic->lesson->name ?? 'Unknown Lesson';
+
+            $questionsInLesson = Question::whereHas('topic', function ($query) use ($lessonId) {
+                $query->where('lesson_id', $lessonId);
+            })->count();
+
+            $solvedQuestions = $answers->count();
+
+            $percentage = $questionsInLesson > 0 ? ($solvedQuestions / $questionsInLesson) * 100 : 0;
+
+            $lessonsProgress[] = [
+                'lesson_id' => $lessonId,
+                'lesson_name' => $lessonName,
+                'solved_questions' => $solvedQuestions,
+                'total_questions' => $questionsInLesson,
+                'progress_percentage' => round($percentage, 2),
+            ];
+        }
+
+        $challenges = ChallengeSubission::where('user_id', $userId)
+            ->with('challenge')
+            ->get()
+            ->map(function ($submission) {
+                return [
+                    'challenge_id' => $submission->challenge_id,
+                    'challenge_name' => $submission->challenge->name ?? '',
+                    'difficulty' => $submission->challenge->difficulty ?? '',
+                    'points' => $submission->challenge->points ?? 0,
+                    'status' => $submission->status,
+                    'admin_feedback' => $submission->admin_feedback,
+                    'submitted_at' => $submission->submitted_at,
+                ];
+            });
+
+        return response()->json([
+            'lessons_progress' => $lessonsProgress,
+            'challenges' => $challenges,
+        ]);
+    }
+
+    public function challenge(Request $request)
+    {
+
+        $request->validate([
+            'challenge_id' => 'required|exists:challenges,id',
+            'report_file' => 'required|file|mimes:pdf,doc,docx,png,jpg,jpeg',
+        ]);
+
+
+        $filePath = $request->file('report_file')->store('challenge_reports', 'public');
+
+
+        $submission = ChallengeSubission::create([
+            'user_id' => $request->user_id,
+            'challenge_id' => $request->challenge_id,
+            'report_file_path' => $filePath,
+            'status' => 'pending',
+            'admin_feedback' => 'under reviewing',
+            'submitted_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Challenge submission created successfully!',
+            'submission' => $submission,
+        ], 201);
     }
 }

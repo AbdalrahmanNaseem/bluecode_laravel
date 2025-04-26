@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->foreignIdFor(\App\Models\Question::class);
             $table->foreignIdFor(\App\Models\Answer::class);
-            $table->boolean('is_correct')->default(false);
 
 
             $table->timestamps();
