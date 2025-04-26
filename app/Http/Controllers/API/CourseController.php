@@ -173,6 +173,19 @@ class CourseController extends Controller
         $user = User::find($request->user_id);
         $question = Question::find($request->question_id);
 
+        // $query = UserAnswer::query();
+        // $query->where('user_id', $user->id);
+        // $query->where('question_id', $question->id);
+
+        $query = UserAnswer::where('user_id', $user->id)->where('question_id', $question->id);
+
+        if ($query->exists()) {
+            return response()->json([
+                'message'     => 'This question was solved ^_^',
+                'user_points' => $user->points,
+            ], 200);
+        }
+
         if (!$user || !$question) {
             return response()->json([
                 'message' => 'User or Question not found'
@@ -197,6 +210,20 @@ class CourseController extends Controller
         return response()->json([
             'message' => 'Score updated successfully',
             'user' => $user
+        ], 200);
+    }
+    public function get_user_answers($id)
+    {
+        $user = User::find($id);
+        if (! $user) {
+            return response()->json([
+                'message' => 'User not found broo ^_^',
+            ], 404);
+        }
+        $answers = UserAnswer::where('user_id', $user->id)->get();
+        return response()->json([
+            'user' => $user,
+            'answers' => $answers,
         ], 200);
     }
 }
