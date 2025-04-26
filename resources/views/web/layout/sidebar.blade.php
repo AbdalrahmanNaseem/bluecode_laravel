@@ -102,6 +102,24 @@
                                 </a>
                             </li>
 
+                            <li>
+                                <a href="{{ route('challenge.index') }}">
+                                    <span class="sub-item">challenge</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('challenge.reports') }}">
+                                    <span class="sub-item">reports</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('UserAnswer.reports') }}">
+                                    <span class="sub-item">UserAnswer</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
