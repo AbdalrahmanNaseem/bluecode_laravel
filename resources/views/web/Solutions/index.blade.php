@@ -41,7 +41,7 @@
                                     <tr>
                                         <td class="text-center">{{ $userAnswer->id }}</td>
                                         <td class="text-center">{{ $userAnswer->user->name }}</td>
-                                        <td class="text-center">{{ $userAnswer->questio->question }}</td>
+                                        <td class="text-center">{{ $userAnswer->question->question }}</td>
                                         <td class="text-center">{{ $userAnswer->answer->option }}</td>
                                         {{-- <td class="">
                                             <div class="row ">
