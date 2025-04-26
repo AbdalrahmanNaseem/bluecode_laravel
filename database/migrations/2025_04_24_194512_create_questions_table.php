@@ -16,7 +16,6 @@ return new class extends Migration
 
             $table->foreignIdFor(\App\Models\Topic::class);
             $table->string('question');
-            $table->string('subject');
             $table->integer('point');
             $table->string('image')->nullable();
             $table->timestamps();

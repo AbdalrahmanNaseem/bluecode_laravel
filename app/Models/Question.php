@@ -12,7 +12,6 @@ class Question extends Model
 
     protected $fillable = [
         'question',
-        'subject',
         'point',
         'image',
         'topic_id',

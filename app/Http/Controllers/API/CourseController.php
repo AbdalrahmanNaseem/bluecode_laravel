@@ -30,12 +30,16 @@ class CourseController extends Controller
         $lessons = lesson::all();
         return response($lessons);
     }
+
+
     public function challeng_index()
     {
 
         $challengs = Challenge::all();
         return response($challengs);
     }
+
+
     public function topics_index()
     {
         $topics = Topic::all();
@@ -286,13 +290,14 @@ class CourseController extends Controller
                 ];
             });
 
+
         return response()->json([
             'lessons_progress' => $lessonsProgress,
             'challenges' => $challenges,
         ]);
     }
 
-    public function challenge(Request $request)
+    public function challenge_submission_store(Request $request)
     {
 
         $request->validate([

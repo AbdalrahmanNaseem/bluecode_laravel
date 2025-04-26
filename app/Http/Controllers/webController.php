@@ -377,7 +377,6 @@ class webController extends Controller
     {
         $request->validate([
             'question' => 'required|string|max:255',
-            'subject' => 'required|string|max:255',
             'point' => 'required|numeric|min:0',
             'topic_id' => 'required|exists:topics,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -390,7 +389,6 @@ class webController extends Controller
 
         Question::create([
             'question' => $request->question,
-            'subject' => $request->subject,
             'point' => $request->point,
             'image' => $imagePath,
             'topic_id' => $request->topic_id,
