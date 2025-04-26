@@ -246,17 +246,17 @@ class CourseController extends Controller
         $lessonsProgress = [];
 
         $userAnswers = UserAnswer::where('user_id', $userId)
-            ->with('questio.topic.lesson')
+            ->with('question.topic.lesson')
             ->get();
 
         $groupedByLesson = $userAnswers->groupBy(function ($answer) {
-            return $answer->questio->topic->lesson->id ?? null;
+            return $answer->question->topic->lesson->id ?? null;
         });
 
         foreach ($groupedByLesson as $lessonId => $answers) {
             if ($lessonId === null) continue;
 
-            $lessonName = $answers->first()->questio->topic->lesson->name ?? 'Unknown Lesson';
+            $lessonName = $answers->first()->question->topic->lesson->name ?? 'Unknown Lesson';
 
             $questionsInLesson = Question::whereHas('topic', function ($query) use ($lessonId) {
                 $query->where('lesson_id', $lessonId);
