@@ -594,7 +594,7 @@ class webController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    { dd($request);
         $student_id = $request->user_id;
 
         $user_id = User::where('id', $student_id)->first();
