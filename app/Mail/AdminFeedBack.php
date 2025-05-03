@@ -42,7 +42,7 @@ class AdminFeedBack extends Mailable
     {
         return new Content(
             view: 'web.AdminFeedBack',
-            with: [
+            data: [
                 'adminFeedback' => $this->adminFeedback,
                 'status' => $this->status,
             ],
