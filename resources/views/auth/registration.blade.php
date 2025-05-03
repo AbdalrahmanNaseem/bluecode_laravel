@@ -24,6 +24,20 @@
                                     <span class="text-danger">{{ $errors->first('FullName') }}</span>
                                 @endif
                             </div>
+                            <div class="mb-3 form-group">
+                                <input type="text" placeholder="phone" id="phone" class="form-control"
+                                    name="phone" required autofocus>
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                @endif
+                            </div>
+                            <div class="mb-3 form-group">
+                                <input type="text" placeholder="country" id="country" class="form-control"
+                                    name="country" required autofocus>
+                                @if ($errors->has('country'))
+                                    <span class="text-danger">{{ $errors->first('country') }}</span>
+                                @endif
+                            </div>
 
                             <div class="mb-3 form-group">
                                 <input type="text" placeholder="Email" id="email_address" class="form-control"
