@@ -59,8 +59,7 @@
 
 
 
-                                        <td class="text-center"> {!! $challenge->scenario !!}
-                                        </td>
+                                        <td class="text-center"> {!! $challenge->scenario !!}</td>
 
 
                                         <td class="text-center"> {!! $challenge->investigation_questions !!} </td>

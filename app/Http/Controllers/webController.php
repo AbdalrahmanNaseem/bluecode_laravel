@@ -546,6 +546,14 @@ class webController extends Controller
             $challenge->vm_download_link = $request->vm_download_link;
         }
 
+
+        if ($request->has('scenario')) {
+            $challenge->scenario = $request->scenario;
+        }
+        if ($request->has('investigation_questions')) {
+            $challenge->scenario = $request->scenario;
+        }
+
         if ($request->has('difficulty')) {
             $challenge->difficulty = $request->difficulty;
         }
