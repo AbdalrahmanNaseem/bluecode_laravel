@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image')->nullable();
 
 
-            $table->foreignIdFor(\App\Models\User::class,);
+            $table->foreignIdFor(\App\Models\User::class,)->onDelete('cascade');;
 
             $table->foreignIdFor(\App\Models\Course::class,);
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('vm_download_link')->nullable();
             $table->enum('difficulty', ['easy', 'medium', 'hard']);
             $table->integer('points')->default(0);
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');;
 
 
             $table->timestamps();

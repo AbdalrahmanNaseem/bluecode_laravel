@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_answers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');;
             $table->foreignIdFor(\App\Models\Question::class);
             $table->foreignIdFor(\App\Models\Answer::class);
 

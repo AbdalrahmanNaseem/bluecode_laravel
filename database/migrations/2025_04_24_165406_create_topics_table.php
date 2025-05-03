@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->text('supject');
-            $table->foreignIdFor(\Illuminate\Foundation\Auth\User::class);
+            $table->foreignIdFor(\Illuminate\Foundation\Auth\User::class)->onDelete('cascade');;
             $table->foreignIdFor(\App\Models\lesson::class);
 
             $table->timestamps();
@@ -32,4 +32,3 @@ return new class extends Migration
         Schema::dropIfExists('topics');
     }
 };
-

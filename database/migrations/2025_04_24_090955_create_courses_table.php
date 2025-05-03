@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\User::class,);
+            $table->foreignIdFor(\App\Models\User::class,)->onDelete('cascade');;
             $table->string('name');
             $table->string('description');
             $table->string('image')->nullable();
