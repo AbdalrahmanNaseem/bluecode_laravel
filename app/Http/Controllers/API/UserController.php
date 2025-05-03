@@ -145,7 +145,6 @@ class UserController extends Controller
             'phone'     => 'sometimes|required|string|max:255',
             'email'     => 'sometimes|required|email|unique:users,email,' . $user->id,
             'country'   => 'sometimes|required|string|max:255',
-            'points'    => 'sometimes|integer|min:0',
             'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
             'current_password' => 'sometimes|required_with:new_password|string',
