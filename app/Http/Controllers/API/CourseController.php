@@ -328,4 +328,21 @@ class CourseController extends Controller
             'submission' => $submission,
         ], 201);
     }
+
+    public function getUsersByLevel()
+    {
+        $users = User::select('*')
+            ->selectSub(function ($query) {
+                $query->select('start')
+                    ->from('levels')
+                    ->whereColumn('users.points', '>=', 'levels.start')
+                    ->whereColumn('users.points', '<=', 'levels.end')
+                    ->limit(1);
+            }, 'level_start')
+            ->orderByDesc('level_start')
+            ->orderByDesc('points')
+            ->get();
+
+        return response()->json($users);
+    }
 }
