@@ -51,7 +51,6 @@ class CustomAuthController extends Controller
             'FullName' => 'required',
             'phone' => 'required',
             'country' => 'required',
-            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
 
