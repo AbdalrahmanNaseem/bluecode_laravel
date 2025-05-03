@@ -130,10 +130,9 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function updateUserById(Request $request, $user_id)
+    public function updateUserById(Request $request, $id)
     {
-        $user = User::find($user_id);
-
+        $user = User::find($id);
         if (!$user) {
             return response()->json([
                 'message' => 'User not found.',
