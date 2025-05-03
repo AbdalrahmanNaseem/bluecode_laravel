@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminFeedBack;
 use App\Models\Answer;
 use App\Models\Challenge;
 use App\Models\ChallengeSubission;
@@ -14,6 +15,7 @@ use App\Models\User;
 use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -593,12 +595,25 @@ class webController extends Controller
 
     public function update(Request $request, $id)
     {
+        $student_id = $request->user_id;
+
+        $user_id = User::where('id', $student_id)->first();
+        $student_email = $user_id->email;
+
         $submission = ChallengeSubission::findOrFail($id);
 
         $submission->update([
             'admin_feedback' => $request->admin_feedback,
             'status' => $request->status,
         ]);
+
+        Mail::to($student_email)->send(new AdminFeedBack(
+
+            $submission->admin_feedback,
+            $submission->status
+        ));
+
+
 
         return redirect()->back()->with('success', 'Submission updated successfully.');
     }

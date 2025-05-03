@@ -9,10 +9,15 @@ use App\Http\Controllers\CourseController as ControllersCourseController;
 
 Route::post('/login', [UserController::class, "login"]);
 Route::post('/register', [UserController::class, "register"]);
+
 Route::get("/users", [UserController::class, "all_users"]);
+
 Route::get("/user/{id}", [UserController::class, "get_user_by_id"]);
-Route::post("/user", [UserController::class, "update_user_info"]);
+
+// Route::post("/user", [UserController::class, "update_user_info"]);
+
 Route::put('/users/update/{id}', [UserController::class, 'updateUserById']);
+
 Route::delete('/users/delete/{id}', [UserController::class, 'deleteUser']);
 
 Route::get('/courses', [CourseController::class, "index"]);
@@ -33,16 +38,16 @@ Route::get('/question', [CourseController::class, "question_index"]);
 
 Route::get('/lessenQuestions/{id}', [CourseController::class, "get_questions_and_topic_by_lessenId"]);
 
-Route::post('/submitAnswer', [CourseController::class, "add_score_to_the_user"]);
+Route::post('/submitAnswer', [CourseController::class, "add_score_to_the_user"]); //submitAnswer
 
 
-Route::get('/userAnswers/{id}', [CourseController::class, "get_user_answers"]);
+Route::get('/userAnswers/{id}', [CourseController::class, "get_user_answers"]); // userAnswers
 
 
-Route::post('/user-progress', [CourseController::class, 'getUserProgress']);
+Route::post('/user-progress', [CourseController::class, 'getUserProgress']); //userDashboard
 
 
-Route::post('/challenge-submission', [CourseController::class, 'challenge_submission_store']);
+Route::post('/challenge-submission', [CourseController::class, 'challenge_submission_store']); //challenge-submission
 
 
-Route::get('/users-by-level', [CourseController::class, 'getUsersByLevel']);
+Route::get('/users-by-level', [CourseController::class, 'getUsersByLevel']); //lederBord

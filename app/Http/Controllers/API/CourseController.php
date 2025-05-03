@@ -299,6 +299,8 @@ class CourseController extends Controller
             'challenges' => $challenges,
             'userPoint' => $userPoint,
             'AllLevels' => $levels,
+            'FullName'   => $user_Id->name,
+
         ]);
     }
 
@@ -343,7 +345,6 @@ class CourseController extends Controller
             ->orderByDesc('points')
             ->get();
 
-        // تنسيق البيانات حسب المطلوب
         $formattedUsers = $users->map(function ($user) {
             return [
                 'id'     => $user->id,
@@ -351,6 +352,7 @@ class CourseController extends Controller
                 'name'   => $user->name,
                 'points' => $user->points,
                 'level'  => $user->level_name,
+
             ];
         });
 
