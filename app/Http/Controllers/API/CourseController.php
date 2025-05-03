@@ -343,6 +343,16 @@ class CourseController extends Controller
             ->orderByDesc('points')
             ->get();
 
-        return response()->json($users);
+        // تنسيق البيانات حسب المطلوب
+        $formattedUsers = $users->map(function ($user) {
+            return [
+                'id'     => $user->id,
+                'name'   => $user->name,
+                'points' => $user->points,
+                'level'  => $user->level_name,
+            ];
+        });
+
+        return response()->json($formattedUsers->values());
     }
 }
