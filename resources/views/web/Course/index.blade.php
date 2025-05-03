@@ -27,13 +27,13 @@
                         <table class="table mb-0 align-items-center">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">Name</th>
-                                    <th class="text-center">Description</th>
-                                    <th class="text-center">Image</th>
-                                    <th class="text-center">type</th>
-                                    <th class="text-center">lessons </th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,6 +108,8 @@
                                                         <i class="bi bi-pencil-square"></i>
                                                     </button>
                                                 </div>
+
+
                                                 <div class="col-md-4 ">
                                                     <button class="btn btn-sm btn-success" data-bs-toggle="modal"
                                                         data-bs-target="#CourselessonModal{{ $course->id }}">
@@ -115,6 +117,9 @@
 
                                                     </button>
                                                 </div>
+
+
+
                                                 <div class="col-md-4 ">
                                                     <form action="{{ route('Course.destroy', $course->id) }}"
                                                         method="POST"
@@ -169,6 +174,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+
                                             <!-- Courselesson Modal -->
                                             <div class="modal fade" id="CourselessonModal{{ $course->id }}"
                                                 tabindex="-1" aria-hidden="true">

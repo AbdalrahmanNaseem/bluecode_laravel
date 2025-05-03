@@ -48,6 +48,9 @@ Route::delete('level/{id}', [webController::class, 'Level_destroy'])->name('leve
 
 
 
+
+
+
 Route::get('Course', [webController::class, 'Course_index'])->name('Course.index');
 Route::post('Course', [webController::class, 'Course_store'])->name('Course.store');
 Route::put('Course/{id}', [webController::class, 'Course_update'])->name('Course.update');
