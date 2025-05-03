@@ -43,5 +43,4 @@ Route::post('/user-progress', [CourseController::class, 'getUserProgress']);
 Route::post('/challenge-submission', [CourseController::class, 'challenge_submission_store']);
 
 
-Route::get('/users-by-level', [CourseController::class, 'getUsersByLevel']); //Leaderboared
-
+Route::get('/users-by-level', [CourseController::class, 'getUsersByLevel']);
