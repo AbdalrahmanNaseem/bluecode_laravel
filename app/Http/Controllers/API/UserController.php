@@ -168,6 +168,8 @@ class UserController extends Controller
 
         if ($request->hasFile('image')) {
             $user->image = $request->file('image')->store('user_images', 'public');
+        } elseif ($request->has('image')) {
+            $user->image = null;
         }
 
         if (isset($data['current_password']) && isset($data['new_password'])) {
@@ -187,6 +189,7 @@ class UserController extends Controller
             'user'    => $user,
         ]);
     }
+
 
     public function deleteUser($id)
     {
