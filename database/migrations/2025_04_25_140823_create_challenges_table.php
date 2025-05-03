@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('description');
+            $table->text('scenario')->nullable();
+            $table->text('investigation_questions')->nullable();
             $table->string('image')->nullable();
             $table->string('vm_download_link')->nullable();
             $table->enum('difficulty', ['easy', 'medium', 'hard']);

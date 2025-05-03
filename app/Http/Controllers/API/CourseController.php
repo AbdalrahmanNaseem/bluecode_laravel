@@ -347,6 +347,7 @@ class CourseController extends Controller
         $formattedUsers = $users->map(function ($user) {
             return [
                 'id'     => $user->id,
+                'image'     => $user->image,
                 'name'   => $user->name,
                 'points' => $user->points,
                 'level'  => $user->level_name,

@@ -17,6 +17,8 @@ class Challenge extends Model
         'difficulty',
         'points',
         'user_id',
+        'scenario',
+        'investigation_questions',
     ];
 
     public function user()

@@ -33,6 +33,8 @@
                                     <th class="text-center">name</th>
                                     <th class="text-center">description</th>
                                     <th class="text-center">image</th>
+                                    <th class="text-center">scenario</th>
+                                    <th class="text-center">investigation_questions</th>
                                     <th class="text-center">vm_download_link</th>
                                     <th class="text-center">difficulty </th>
                                     <th class="text-center">points</th>
@@ -54,6 +56,14 @@
                                         <td class="text-center"> {{ $challenge->vm_download_link }} </td>
                                         <td class="text-center"> {{ $challenge->difficulty }} </td>
                                         <td class="text-center"> {{ $challenge->points }} </td>
+
+
+
+                                        <td class="text-center"> {!! $challenge->scenario !!}
+                                        </td>
+
+
+                                        <td class="text-center"> {!! $challenge->investigation_questions !!} </td>
 
 
                                         <td class="">
@@ -106,6 +116,15 @@
                                                                     type="text"
                                                                     value="{{ $challenge->vm_download_link }}"><br>
 
+
+                                                                <label>scenario</label>
+                                                                <input class="form-control" name="scenario" type="text"
+                                                                    value="{{ $challenge->scenario }}"><br>
+                                                                <label>investigation_questions</label>
+                                                                <input class="form-control" name="investigation_questions"
+                                                                    type="text"
+                                                                    value="{{ $challenge->investigation_questions }}"><br>
+
                                                                 <label>Points</label>
                                                                 <input class="form-control" name="points" type="number"
                                                                     value="{{ $challenge->points }}"><br>
@@ -125,7 +144,8 @@
                                                                 <div class="mb-3">
                                                                     <label for="difficulty"
                                                                         class="form-label">Difficulty</label>
-                                                                    <select class="form-select" name="difficulty" required>
+                                                                    <select class="form-select" name="difficulty"
+                                                                        required>
                                                                         <option value="easy"
                                                                             {{ $challenge->difficulty == 'easy' ? 'selected' : '' }}>
                                                                             Easy</option>
@@ -175,14 +195,25 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+
                         <label>Name</label>
                         <input class="form-control" name="name" type="text"><br>
+
                         <label>vm_download_link</label>
                         <input class="form-control" name="vm_download_link" type="text"><br>
+
+                        <label>scenario</label>
+                        <input class="form-control" name="scenario" type="text"><br>
+
+                        <label>investigation_questions</label>
+                        <input class="form-control" name="investigation_questions" type="text"><br>
+
                         <label>points</label>
                         <input class="form-control" name="points" type="number"><br>
+
                         <label>Description</label>
                         <textarea class="form-control" name="description"></textarea><br>
+
                         <label>Image</label>
                         <input class="form-control" name="image" type="file">
                         <div class="mb-3">

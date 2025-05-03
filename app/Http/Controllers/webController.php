@@ -509,6 +509,8 @@ class webController extends Controller
             'name' => $request->name,
             'vm_download_link' => $request->vm_download_link,
             'points' => $request->points,
+            'scenario' => $request->scenario,
+            'investigation_questions' => $request->investigation_questions,
             'description' => $request->description,
             'image' => $imagePath,
             'difficulty' => $request->difficulty,
