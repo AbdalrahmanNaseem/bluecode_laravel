@@ -65,13 +65,24 @@ class UserController extends Controller
     public function get_user_by_id($id)
     {
         $user = User::find($id);
-        if (empty($user)) {
+
+        if (!$user) {
             return response()->json([
-                "message" => "user is not found"
+                'message' => 'User not found.',
             ], 404);
         }
-        return response($user);
+
+        return response()->json([
+            'id'       => $user->id,
+            'name'     => $user->name,
+            'FullName' => $user->FullName,
+            'phone'    => $user->phone,
+            'email'    => $user->email,
+            'country'  => $user->country,
+            'image'    => $user->image ? asset('storage/' . $user->image) : null,
+        ]);
     }
+
 
 
 

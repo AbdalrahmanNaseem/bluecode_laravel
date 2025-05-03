@@ -12,7 +12,7 @@ Route::post('/register', [UserController::class, "register"]);
 Route::get("/users", [UserController::class, "all_users"]);
 Route::get("/user/{id}", [UserController::class, "get_user_by_id"]);
 Route::post("/user", [UserController::class, "update_user_info"]);
-Route::post('/users/update/{id}', [UserController::class, 'updateUserById']);
+Route::put('/users/update/{id}', [UserController::class, 'updateUserById']);
 Route::delete('/users/delete/{id}', [UserController::class, 'deleteUser']);
 
 Route::get('/courses', [CourseController::class, "index"]);
