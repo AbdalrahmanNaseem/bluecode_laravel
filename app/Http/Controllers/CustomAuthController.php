@@ -61,6 +61,7 @@ class CustomAuthController extends Controller
             'name' => $request->input('name'),
             'FullName' => $request->input('FullName'),
             'email' => $request->input('email'),
+            'image' => null,
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password'))
         ]);

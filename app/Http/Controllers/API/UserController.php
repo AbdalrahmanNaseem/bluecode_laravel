@@ -97,10 +97,11 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'     => 'required|string|max:255|unique:users,name',
-            'country'     => 'required|string|max:255|',
-            'phone'     => 'required|string|max:255|',
-            'FullName'     => 'required|string|max:255|unique:users,name',
+            'country'  => 'required|string|max:255',
+            'phone'    => 'required|string|max:255',
+            'FullName' => 'required|string|max:255|unique:users,name',
             'email'    => 'required|string|email|unique:users,email',
+            'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => 'required|string|min:8',
         ]);
 
@@ -113,10 +114,10 @@ class UserController extends Controller
 
         $data = $validator->validated();
 
-        if (User::where('email', $data['email'])->exists()) {
-            return response()->json([
-                'message' => 'email is exist'
-            ], 422);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('user_images', 'public');
+        } else {
+            $data['image'] = null;
         }
 
         $data['password'] = Hash::make($data['password']);
@@ -127,5 +128,65 @@ class UserController extends Controller
             'message' => 'register success',
             'user'    => $user,
         ], 201);
+    }
+
+    public function updateUserById(Request $request, $user_id)
+    {
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found.',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name'      => 'sometimes|required|string|max:255|unique:users,name,' . $user->id,
+            'FullName'  => 'sometimes|required|string|max:255',
+            'phone'     => 'sometimes|required|string|max:255',
+            'email'     => 'sometimes|required|email|unique:users,email,' . $user->id,
+            'country'   => 'sometimes|required|string|max:255',
+            'points'    => 'sometimes|integer|min:0',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+            'current_password' => 'sometimes|required_with:new_password|string',
+            'new_password'     => 'sometimes|required_with:current_password|string|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors'  => $validator->errors(),
+            ], 422);
+        }
+
+        $data = $validator->validated();
+
+        foreach (['name', 'FullName', 'phone', 'email', 'country', 'points'] as $field) {
+            if (isset($data[$field])) {
+                $user->$field = $data[$field];
+            }
+        }
+
+        if ($request->hasFile('image')) {
+            $user->image = $request->file('image')->store('user_images', 'public');
+        }
+
+        if (isset($data['current_password']) && isset($data['new_password'])) {
+            if (!Hash::check($data['current_password'], $user->password)) {
+                return response()->json([
+                    'message' => 'Current password is incorrect.',
+                ], 403);
+            }
+
+            $user->password = Hash::make($data['new_password']);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'User updated successfully.',
+            'user'    => $user,
+        ]);
     }
 }
