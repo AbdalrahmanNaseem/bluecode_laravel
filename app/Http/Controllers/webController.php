@@ -600,20 +600,23 @@ class webController extends Controller
 
         $user_id = User::where('id', $user)->first();
         $student_email = $user_id->email;
-
-
+// dd($student_email);
+// dd($request->input('admin_feedback'));
 
 
         $submission->update([
-            'admin_feedback' => $request->admin_feedback,
-            'status' => $request->status,
+            'admin_feedback' => $request->input('admin_feedback'),
+            'status' => $request->input('status'),
         ]);
+
+        $adminFeedback = $request->input('admin_feedback');
+        $status = $request->input('status');
 
         Mail::to($student_email)->send(new AdminFeedBack(
 
-            $submission->admin_feedback,
-            $submission->status
-        ));
+           $adminFeedback,
+           $status)
+        );
 
 
 

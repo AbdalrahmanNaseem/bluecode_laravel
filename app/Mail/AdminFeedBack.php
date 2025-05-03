@@ -16,6 +16,7 @@ class AdminFeedBack extends Mailable
     public $adminFeedback;
     public $status;
 
+
     /**
      * Create a new message instance.
      */

@@ -27,11 +27,11 @@
                         <table class="table mb-0 align-items-center">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
-                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
-                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
-                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
-                                    <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">modeul name</th>
+                                    <th class="text-center">moduel description</th>
+                                    <th class="text-center">moduel image</th>
+                                    <th class="text-center">moudel type</th>
                                     <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
                                     <th class="text-center">الاعمدة التي تم انشائهم الخاصة بهاد التيبيل </th>
                                 </tr>
