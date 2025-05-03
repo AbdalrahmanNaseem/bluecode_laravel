@@ -38,15 +38,14 @@ class AdminFeedBack extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    public function build()
     {
-        return new Content(
-            view: 'web.AdminFeedBack',
-            data: [
+        return $this->subject('Admin Feedback')
+            ->view('web.AdminFeedBack')
+            ->with([
                 'adminFeedback' => $this->adminFeedback,
                 'status' => $this->status,
-            ],
-        );
+            ]);
     }
 
     /**
