@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('challenge_subissions', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');;
             $table->foreignIdFor(\App\Models\Challenge::class);
             $table->text('report_file_path');
             $table->string('status')->default('pending')->comment('one of: pending, accepted, rejected');
