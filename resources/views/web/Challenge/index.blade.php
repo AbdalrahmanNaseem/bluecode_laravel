@@ -53,16 +53,17 @@
                                                     width="50">
                                             @endif
                                         </td>
+                                        <td class="text-center"> {!! $challenge->scenario !!}</td>
+
+
+                                        <td class="text-center"> {!! $challenge->investigation_questions !!} </td>
+
                                         <td class="text-center"> {{ $challenge->vm_download_link }} </td>
                                         <td class="text-center"> {{ $challenge->difficulty }} </td>
                                         <td class="text-center"> {{ $challenge->points }} </td>
 
 
 
-                                        <td class="text-center"> {!! $challenge->scenario !!}</td>
-
-
-                                        <td class="text-center"> {!! $challenge->investigation_questions !!} </td>
 
 
                                         <td class="">
@@ -117,12 +118,12 @@
 
 
                                                                 <label>scenario</label>
-                                                                <input class="form-control" name="scenario" type="text"
-                                                                    value="{{ $challenge->scenario }}"><br>
+                                                                <textarea class="form-control" name="scenario" type="text" value="{{ $challenge->scenario }}">
+                                                                </textarea><br>
                                                                 <label>investigation_questions</label>
-                                                                <input class="form-control" name="investigation_questions"
-                                                                    type="text"
-                                                                    value="{{ $challenge->investigation_questions }}"><br>
+                                                                <textarea class="form-control" name="investigation_questions" type="text"
+                                                                    value="{{ $challenge->investigation_questions }}">
+                                                                </textarea><br>
 
                                                                 <label>Points</label>
                                                                 <input class="form-control" name="points" type="number"
@@ -202,10 +203,10 @@
                         <input class="form-control" name="vm_download_link" type="text"><br>
 
                         <label>scenario</label>
-                        <input class="form-control" name="scenario" type="text"><br>
+                        <textarea class="form-control" name="scenario" type="text"> </textarea> <br>
 
                         <label>investigation_questions</label>
-                        <input class="form-control" name="investigation_questions" type="text"><br>
+                        <textarea class="form-control" name="investigation_questions" type="text"></textarea> <br>
 
                         <label>points</label>
                         <input class="form-control" name="points" type="number"><br>
