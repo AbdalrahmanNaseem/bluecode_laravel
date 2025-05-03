@@ -595,12 +595,6 @@ class webController extends Controller
 
     public function update(Request $request, $id)
     {
-
-
-        $submission = ChallengeSubission::findOrFail($id);
-
-        $user = $submission->user_id;
-
         $student_id = $request->user_id;
 
         $user_id = User::where('id', $user)->first();
