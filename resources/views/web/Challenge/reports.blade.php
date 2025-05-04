@@ -53,8 +53,10 @@
                                         </td>
                                         <td class="text-center">{{ $submitted->status }}</td>
                                         <td class="text-center">
-                                            <a href="{{ asset('storage/' . $submitted->admin_feedback) }}"
-                                                target="_blank"></a>
+                                            <a href="{{ asset('storage/' . $submitted->admin_feedback) }}" target="_blank">
+                                                View Report
+                                            </a>
+
                                         </td>
                                         <td class="text-center">{{ $submitted->submitted_at }}</td>
 
