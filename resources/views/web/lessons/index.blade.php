@@ -31,8 +31,8 @@
                                     <th class="text-center">Name</th>
 
                                     <th class="text-center">Image</th>
-                                    <th class="text-center">courses </th>
-                                    <th class="text-center">topiecs </th>
+                                    <th class="text-center">Modules </th> {{-- courses --}}
+                                    <th class="text-center">Tasks </th> {{-- Topics --}}
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>

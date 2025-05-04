@@ -30,7 +30,7 @@ class CustomAuthController extends Controller
 
         if (Auth::attempt($credentials)) {
 
-            return redirect()->route('test.blade');
+            return redirect()->route('LandingPage');
         }
         $validator['emailPassword'] = 'Email address or password is incorrect.';
 

@@ -9,6 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('main');
 
+Route::get('LandingPage', function () {
+    return view('web.LandingPage');
+})->name('LandingPage');
+
+
 
 
 
