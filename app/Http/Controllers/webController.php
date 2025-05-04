@@ -605,7 +605,7 @@ class webController extends Controller
         if ($request->hasFile('admin_feedback')) {
             $file = $request->file('admin_feedback');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('admin_feedbacks', $fileName, 'public');
+            $filePath = $file->storeAs('challenge_reports', $fileName, 'public');
         } else {
             return redirect()->back()->with('error', 'Please upload a feedback file.');
         }
