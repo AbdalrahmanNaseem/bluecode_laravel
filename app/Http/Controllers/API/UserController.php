@@ -162,6 +162,9 @@ class UserController extends Controller
             'new_password'     => 'sometimes|required_with:current_password|string|min:8',
         ]);
 
+
+
+
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed.',
@@ -191,6 +194,7 @@ class UserController extends Controller
             }
 
             $user->password = Hash::make($data['new_password']);
+            $data['rolle'] = 'student';
         }
 
         $user->save();
