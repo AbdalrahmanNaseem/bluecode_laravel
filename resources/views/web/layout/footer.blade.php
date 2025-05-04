@@ -5,7 +5,7 @@
         </nav>
         <div class="copyright">
             {{ date('Y') }} made by
-            <a href="https://www.linkedin.com/in/abdalrahman-naseem-006a24328/">Eng.Abdalrahman Naseem</a>
+            <a href="https://www.linkedin.com/in/abdelrahman-aladwani-a95063285/">Eng.Abdalrahman </a>
         </div>
         <div>
             Distributed by
