@@ -140,10 +140,10 @@ class UserController extends Controller
             'user'    => $user,
         ], 201);
     }
-
     public function updateUserById(Request $request, $id)
     {
         $user = User::find($id);
+
         if (!$user) {
             return response()->json([
                 'message' => 'User not found.',
@@ -151,19 +151,15 @@ class UserController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name'      => 'sometimes|required|string|max:255|unique:users,name,' . $user->id,
-            'FullName'  => 'sometimes|required|string|max:255',
-            'phone'     => 'sometimes|required|string|max:255',
-            'email'     => 'sometimes|required|email|unique:users,email,' . $user->id,
-            'country'   => 'sometimes|required|string|max:255',
-            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-
-            'current_password' => 'sometimes|required_with:new_password|string',
-            'new_password'     => 'sometimes|required_with:current_password|string|min:8',
+            'name' => 'sometimes|required|string|max:255|unique:users,name,' . $user->id,
+            'FullName'          => 'sometimes|required|string|max:255',
+            'phone'             => 'sometimes|required|string|max:255',
+            'email'             => 'sometimes|required|email|unique:users,email,' . $user->id,
+            'country'           => 'sometimes|required|string|max:255',
+            'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'current_password'  => 'sometimes|required_with:new_password|string',
+            'new_password'      => 'sometimes|required_with:current_password|string|min:8',
         ]);
-
-
-
 
         if ($validator->fails()) {
             return response()->json([
@@ -174,19 +170,19 @@ class UserController extends Controller
 
         $data = $validator->validated();
 
-        foreach (['name', 'FullName', 'phone', 'email', 'country', 'points'] as $field) {
-            if (isset($data[$field])) {
+        foreach (['name', 'FullName', 'phone', 'email', 'country',] as $field) {
+            if (array_key_exists($field, $data)) {
                 $user->$field = $data[$field];
             }
         }
 
         if ($request->hasFile('image')) {
-            $user->image = $request->file('image')->store('user_images', 'public');
-        } elseif ($request->has('image')) {
-            $user->image = null;
+            $path = $request->file('image')->store('', 'user_images');
+            $user->image = $path;
+            logger('Image stored at: ' . $path);
         }
 
-        if (isset($data['current_password']) && isset($data['new_password'])) {
+        if (!empty($data['current_password']) && !empty($data['new_password'])) {
             if (!Hash::check($data['current_password'], $user->password)) {
                 return response()->json([
                     'message' => 'Current password is incorrect.',
@@ -194,7 +190,6 @@ class UserController extends Controller
             }
 
             $user->password = Hash::make($data['new_password']);
-            $data['rolle'] = 'student';
         }
 
         $user->save();
@@ -204,6 +199,7 @@ class UserController extends Controller
             'user'    => $user,
         ]);
     }
+
 
 
     public function deleteUser($id)
