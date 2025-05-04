@@ -22,6 +22,7 @@
                     </div>
                 </div>
 
+
                 <div class="p-0 card-body">
                     <div class="table-responsive">
                         <table class="table mb-0 align-items-center">
@@ -41,7 +42,7 @@
                                     <tr>
                                         <td class="text-center">{{ $topic->id }}</td>
                                         <td class="text-center">{{ $topic->name }}</td>
-                                        <td class="text-center">{{ $topic->supject }}</td>
+                                        <td class="text-center">{{ substr($topic->supject, 0, 50) }}</td>
                                         <td class="text-center">
                                             @if ($topic->image)
                                                 <img src="{{ asset('storage/' . $topic->image) }}" alt="course image"

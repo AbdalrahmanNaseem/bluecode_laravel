@@ -46,17 +46,21 @@
                                     <tr>
                                         <td class="text-center">{{ $challenge->id }}</td>
                                         <td class="text-center">{{ $challenge->name }}</td>
-                                        <td class="text-center">{{ $challenge->description }}</td>
+                                        <td class="text-center">{{ substr($challenge->description, 0, 50) }}...</td>
                                         <td class="text-center">
                                             @if ($challenge->image)
                                                 <img src="{{ asset($challenge->image) }}" alt="challenge image"
                                                     width="50">
                                             @endif
                                         </td>
-                                        <td class="text-center"> {!! $challenge->scenario !!}</td>
+                                        <td class="text-center">
+                                            {!! substr(strip_tags($challenge->scenario), 0, 50) !!}...
+                                        </td>
 
+                                        <td class="text-center">
+                                            {!! substr(strip_tags($challenge->investigation_questions), 0, 50) !!}...
+                                        </td>
 
-                                        <td class="text-center"> {!! $challenge->investigation_questions !!} </td>
 
                                         <td class="text-center"> {{ $challenge->vm_download_link }} </td>
                                         <td class="text-center"> {{ $challenge->difficulty }} </td>

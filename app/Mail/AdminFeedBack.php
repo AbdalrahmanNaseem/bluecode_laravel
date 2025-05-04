@@ -13,16 +13,16 @@ class AdminFeedBack extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $adminFeedback;
+    public $filePath;
     public $status;
 
 
     /**
      * Create a new message instance.
      */
-    public function __construct($adminFeedback, $status)
+    public function __construct($filePath, $status)
     {
-        $this->adminFeedback = $adminFeedback;
+        $this->filePath = $filePath;
         $this->status = $status;
     }
 
@@ -44,9 +44,8 @@ class AdminFeedBack extends Mailable
         return $this->subject('Admin Feedback')
             ->view('web.AdminFeedBack')
             ->with([
-                'adminFeedback' => $this->adminFeedback,
                 'status' => $this->status,
-            ]);
+            ])->attach(storage_path('app/public/' . $this->filePath));
     }
 
     /**

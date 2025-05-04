@@ -28,7 +28,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">modeul name</th> 
+                                    <th class="text-center">modeul name</th>
                                     <th class="text-center">moduel description</th>
                                     <th class="text-center">moduel image</th>
                                     <th class="text-center">moudel type</th>
@@ -41,7 +41,7 @@
                                     <tr>
                                         <td class="text-center">{{ $course->id }}</td>
                                         <td class="text-center">{{ $course->name }}</td>
-                                        <td class="text-center">{{ $course->description }}</td>
+                                        <td class="text-center">{{ substr($course->description, 0, 50) }}</td>
                                         <td class="text-center">
                                             @if ($course->image)
                                                 <img src="{{ asset($course->image) }}" alt="course image" width="50">

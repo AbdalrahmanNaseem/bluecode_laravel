@@ -52,7 +52,10 @@
                                                 target="_blank">View Report</a>
                                         </td>
                                         <td class="text-center">{{ $submitted->status }}</td>
-                                        <td class="text-center">{{ $submitted->admin_feedback }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ asset('storage/' . $submitted->admin_feedback) }}"
+                                                target="_blank"></a>
+                                        </td>
                                         <td class="text-center">{{ $submitted->submitted_at }}</td>
 
 
@@ -71,7 +74,8 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <form method="POST"
-                                                        action="{{ route('challenge_reports.update', $submitted->id) }}">
+                                                        action="{{ route('challenge_reports.update', $submitted->id) }}"
+                                                        enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
 
@@ -87,7 +91,8 @@
                                                             <div class="mb-3">
                                                                 <label for="admin_feedback" class="form-label">Admin
                                                                     Feedback</label>
-                                                                <textarea class="form-control" name="admin_feedback" rows="3">{{ $submitted->admin_feedback }}</textarea>
+                                                                <input type="file" name="admin_feedback"
+                                                                    class="form-control" required>
                                                             </div>
 
                                                             <div class="mb-3">

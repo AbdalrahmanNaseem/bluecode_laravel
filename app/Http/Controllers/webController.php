@@ -600,22 +600,29 @@ class webController extends Controller
 
         $user_id = User::where('id', $user)->first();
         $student_email = $user_id->email;
-// dd($student_email);
-// dd($request->input('admin_feedback'));
 
+
+        if ($request->hasFile('admin_feedback')) {
+            $file = $request->file('admin_feedback');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('admin_feedbacks', $fileName, 'public');
+        } else {
+            return redirect()->back()->with('error', 'Please upload a feedback file.');
+        }
 
         $submission->update([
-            'admin_feedback' => $request->input('admin_feedback'),
+            'admin_feedback' => $filePath,
             'status' => $request->input('status'),
         ]);
 
-        $adminFeedback = $request->input('admin_feedback');
         $status = $request->input('status');
 
-        Mail::to($student_email)->send(new AdminFeedBack(
+        Mail::to($student_email)->send(
+            new AdminFeedBack(
 
-           $adminFeedback,
-           $status)
+                $filePath,
+                $status
+            )
         );
 
 
