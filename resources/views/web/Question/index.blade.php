@@ -141,8 +141,6 @@
                         <label>Question</label>
                         <input class="form-control" name="question" type="text"><br>
 
-                        <label>Subject</label>
-                        <input class="form-control" name="subject" type="text"><br>
 
                         <label>Point</label>
                         <input class="form-control" name="point" type="number" min="0"><br>

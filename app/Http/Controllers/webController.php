@@ -87,7 +87,7 @@ class webController extends Controller
         $validator = Validator::make($request->all(), [
             'name'        => 'required|string|max:255|unique:courses,name',
             'description' => 'required|string',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4048',
             'type'        => 'required|string|max:100',
         ]);
 
