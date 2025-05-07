@@ -217,7 +217,7 @@
     <div class="login-container animate__animated animate__fadeIn">
         <div class="login-card">
             <div class="card-header">
-                <h3><i class="fas fa-shield-alt"></i> SECURE ADMIN PORTAL</h3>
+                <h3><i class="fas fa-shield-alt"></i> BlueClue ADMIN PANEL</h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('login.custom') }}">

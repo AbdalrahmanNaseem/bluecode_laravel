@@ -218,11 +218,16 @@
                             <h3><i class="fas fa-user-shield"></i> ADMIN REGISTRATION</h3>
                         </div>
                         <div class="card-body">
-                            <div class="form-stepper">
-                                <div class="step active">1</div>
-                                <div class="step">2</div>
-                                <div class="step">3</div>
-                            </div>
+                            {{-- <div class="form-stepper">
+                                <div class="step active">B</div>
+                                <div class="step">l</div>
+                                <div class="step">u</div>
+                                <div class="step">e</div>
+                                <div class="step">C</div>
+                                <div class="step">l</div>
+                                <div class="step">u</div>
+                                <div class="step">e</div>
+                            </div> --}}
 
                             <form action="{{ route('register.custom') }}" method="POST">
                                 @csrf

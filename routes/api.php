@@ -29,8 +29,8 @@ Route::post('/courses', [CourseController::class, "CreateCourse"]);
 Route::get('/lessonsCourse/{id}', [CourseController::class, "get_lessen_by_courseId"]);
 
 
-Route::get('/topic', [CourseController::class, "topics_index"]);
-Route::get('/topic/{id}', [CourseController::class, "get_topic_by_lessonId"]);
+Route::get('/topic', [CourseController::class, "topics_index"])->name('topic.index');
+Route::get('/topic/{id}', [CourseController::class, "get_topic_by_lessonId"])->name('get_topic_by_lessonId');
 
 Route::get('/question', [CourseController::class, "question_index"]);
 

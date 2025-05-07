@@ -158,7 +158,7 @@
         </div>
 
         <a href="{{ route('login') }}" class="btn btn-admin">
-            <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+            <i class="fas fa-sign-in-alt"></i> Login
         </a>
 
         @if (Auth::check())
@@ -183,13 +183,13 @@
                 </div>
             </div>
 
-            <a href="{{ route('test.blade') }}" class="btn btn-admin">
+            <a href="{{ route('LandingPage') }}" class="btn btn-admin">
                 <i class="fas fa-tachometer-alt"></i> Go to Dashboard
             </a>
         @endif
 
         <div class="admin-footer">
-            <i class="fas fa-lock"></i> Secure Connection Encrypted | © 2023 Admin Panel v4.2
+            <i class="fas fa-lock"></i> Secure Connection Encrypted | © 2025 Admin Panel
         </div>
     </div>
 

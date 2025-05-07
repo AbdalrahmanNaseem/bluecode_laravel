@@ -358,7 +358,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h2 class="dashboard-title animate__animated animate__fadeInLeft"><i class="fas fa-shield-alt"></i> ADMIN CONTROL PANEL</h2>
+                    <h2 class="dashboard-title animate__animated animate__fadeInLeft"><i class="fas fa-shield-alt"></i> ADMIN PANEL</h2>
                 </div>
                 <div class="col-md-6">
                     <div class="user-info animate__animated animate__fadeInRight">
@@ -439,28 +439,32 @@
                     </a>
                 </div>
 
-                <!-- Coming Soon Box -->
-                <div class="col-lg-4 col-md-6 mb-4 animate-fade-in-up" style="animation-delay: 0.5s;">
-                    <div class="feature-box coming-soon">
-                        <div class="feature-icon">
-                            <i class="fas fa-magic"></i>
+                <!-- Reports Box -->
+                <div class="col-lg-4 col-md-6 mb-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <a href="{{ route('challenge.reports') }}" class="text-decoration-none">
+                        <div class="feature-box">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i> <!-- Changed icon -->
+                            </div>
+                            <h3 class="feature-title">Users Reports</h3>
+                            <p class="feature-description">View user statistics and performance metrics</p> <!-- Updated description -->
+                            <div class="feature-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
-                        <h3 class="feature-title">New Feature</h3>
-                        <p class="feature-description">Exciting new tools currently in development</p>
-                        <div class="feature-arrow">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
+                    </a>
                     </div>
-                </div>
+
+
 
                 <!-- Stats Box -->
                 <div class="col-lg-4 col-md-6 mb-4 animate-fade-in-up" style="animation-delay: 0.6s;">
                     <div class="feature-box" style="background: rgba(0, 26, 51, 0.7); border: 1px solid rgba(163, 234, 42, 0.3);">
                         <div class="feature-icon" style="color: var(--accent-green);">
-                            <i class="fas fa-chart-pie"></i>
+                            <i class="fas fa-comment-dots"></i>
                         </div>
-                        <h3 class="feature-title" style="color: white;">System Analytics</h3>
-                        <p class="feature-description" style="color: rgba(255,255,255,0.8);">View platform statistics and metrics</p>
+                        <h3 class="feature-title" style="color: white;">New Feature</h3>
+                        <p class="feature-description" style="color: rgba(255,255,255,0.8);">Interact with users through automated conversations, answering questions and providing support instantly</p>
                         <div class="feature-arrow">
                             <i class="fas fa-arrow-right"></i>
                         </div>
