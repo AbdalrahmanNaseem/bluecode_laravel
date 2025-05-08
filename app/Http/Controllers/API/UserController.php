@@ -53,6 +53,7 @@ class UserController extends Controller
             }
 
             $user->password = Hash::make($data['new_password']);
+            $user->rolle = $data['student'];
         }
 
 
@@ -132,6 +133,7 @@ class UserController extends Controller
         }
 
         $data['password'] = Hash::make($data['password']);
+        $data['rolle'] = 'student';
 
         $user = User::create($data);
 

@@ -362,7 +362,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="user-info animate__animated animate__fadeInRight">
-                        <span>Welcome, <strong>Administrator</strong></span>
+                        <span>Welcome, <strong> {{Auth::user()->name}} {{Auth::user()->FullName}}</strong></span>
                         <div class="user-avatar">
                             <i class="fas fa-user-cog"></i>
                         </div>
